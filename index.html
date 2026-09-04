@@ -1,0 +1,3965 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>USWIN — Us Win</title>
+
+  <meta
+    name="description"
+    content="USWIN — a community-driven token and learning community built around knowledge, wisdom, innovation and collective growth."
+  />
+
+  <meta name="theme-color" content="#03050b" />
+
+  <style>
+    :root {
+      --bg: #03050b;
+      --bg-soft: #080c16;
+      --bg-card: rgba(255, 255, 255, 0.045);
+      --bg-card-hover: rgba(255, 255, 255, 0.075);
+
+      --border: rgba(255, 255, 255, 0.10);
+      --border-gold: rgba(245, 196, 81, 0.28);
+
+      --text: #f5f7ff;
+      --muted: #9ca5bb;
+
+      --gold: #f5c451;
+      --gold-light: #ffe9a3;
+
+      --blue: #6c8cff;
+      --green: #5de0a0;
+      --red: #ff6b7a;
+
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+
+      --container: 1120px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family:
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+      background:
+        radial-gradient(
+          circle at 50% -10%,
+          rgba(245, 196, 81, 0.14),
+          transparent 30%
+        ),
+        radial-gradient(
+          circle at 10% 30%,
+          rgba(108, 140, 255, 0.08),
+          transparent 30%
+        ),
+        var(--bg);
+
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    body.modal-open {
+      overflow: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    textarea,
+    select {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .container {
+      width: min(var(--container), calc(100% - 40px));
+      margin: auto;
+    }
+
+    /* =========================
+       NAVIGATION
+    ========================= */
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+
+      background: rgba(3, 5, 11, 0.78);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    .nav-inner {
+      min-height: 76px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 1.35rem;
+      font-weight: 850;
+      letter-spacing: 0.12em;
+      white-space: nowrap;
+    }
+
+    .logo span {
+      color: var(--gold);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 25px;
+      align-items: center;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-size: 0.9rem;
+      transition: 0.25s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--gold-light);
+    }
+
+    .nav-button {
+      padding: 9px 17px;
+      border: 1px solid rgba(245, 196, 81, 0.45);
+      border-radius: 30px;
+      color: var(--gold-light) !important;
+    }
+
+    .nav-button:hover {
+      background: rgba(245, 196, 81, 0.08);
+    }
+
+    .mobile-menu-button {
+      display: none;
+
+      width: 42px;
+      height: 42px;
+
+      border: 1px solid var(--border);
+      border-radius: 10px;
+
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text);
+
+      font-size: 1.2rem;
+    }
+
+    .mobile-menu {
+      display: none;
+
+      padding: 15px 0 20px;
+
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .mobile-menu.active {
+      display: block;
+    }
+
+    .mobile-menu a {
+      display: block;
+      padding: 11px 0;
+      color: var(--muted);
+    }
+
+    /* =========================
+       GENERAL
+    ========================= */
+
+    section {
+      padding: 110px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    .section-heading {
+      text-align: center;
+      margin-bottom: 55px;
+    }
+
+    .section-heading .eyebrow {
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 0.75rem;
+      font-weight: 750;
+      margin-bottom: 12px;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      line-height: 1.1;
+    }
+
+    .section-heading p {
+      max-width: 700px;
+      margin: 18px auto 0;
+      color: var(--muted);
+    }
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero {
+      min-height: 100vh;
+
+      display: flex;
+      align-items: center;
+
+      text-align: center;
+      position: relative;
+
+      padding: 140px 0 100px;
+    }
+
+    .hero::before {
+      content: "";
+
+      position: absolute;
+
+      width: 650px;
+      height: 650px;
+
+      left: 50%;
+      top: 30%;
+
+      transform: translate(-50%, -50%);
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(245, 196, 81, 0.13),
+          transparent 65%
+        );
+
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .badge {
+      display: inline-block;
+
+      padding: 7px 16px;
+      margin-bottom: 24px;
+
+      border: 1px solid rgba(245, 196, 81, 0.35);
+      border-radius: 30px;
+
+      color: var(--gold-light);
+      background: rgba(245, 196, 81, 0.05);
+
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      font-size: clamp(4rem, 12vw, 9rem);
+      line-height: 0.95;
+
+      letter-spacing: 0.08em;
+      font-weight: 900;
+
+      background:
+        linear-gradient(
+          135deg,
+          #ffffff 20%,
+          var(--gold-light) 50%,
+          var(--gold) 80%
+        );
+
+      -webkit-background-clip: text;
+      background-clip: text;
+
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero h2 {
+      margin-top: 22px;
+
+      font-size: clamp(1.3rem, 3vw, 2rem);
+      font-weight: 400;
+
+      color: var(--muted);
+    }
+
+    .hero h2 strong {
+      color: var(--text);
+    }
+
+    .hero-description {
+      max-width: 720px;
+
+      margin: 30px auto 0;
+
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+
+    .hero-buttons {
+      margin-top: 38px;
+
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .button {
+      display: inline-flex;
+
+      align-items: center;
+      justify-content: center;
+
+      padding: 13px 24px;
+
+      border-radius: 9px;
+
+      font-weight: 700;
+
+      transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        background 0.25s ease,
+        border-color 0.25s ease;
+    }
+
+    .button-primary {
+      background: var(--gold);
+      color: #111;
+
+      box-shadow:
+        0 8px 35px rgba(245, 196, 81, 0.18);
+    }
+
+    .button-primary:hover {
+      transform: translateY(-2px);
+
+      box-shadow:
+        0 12px 40px rgba(245, 196, 81, 0.28);
+    }
+
+    .button-secondary {
+      border: 1px solid var(--border);
+
+      color: var(--text);
+
+      background: rgba(255, 255, 255, 0.035);
+    }
+
+    .button-secondary:hover {
+      border-color: rgba(255, 255, 255, 0.25);
+      background: rgba(255, 255, 255, 0.07);
+    }
+
+    /* =========================
+       QUICK STATS
+    ========================= */
+
+    .quick-stats {
+      margin-top: 75px;
+
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+
+      max-width: 850px;
+      margin-left: auto;
+      margin-right: auto;
+
+      border: 1px solid var(--border);
+      border-radius: 18px;
+
+      overflow: hidden;
+
+      background: rgba(255, 255, 255, 0.025);
+    }
+
+    .quick-stat {
+      padding: 25px;
+
+      text-align: center;
+
+      border-right: 1px solid var(--border);
+    }
+
+    .quick-stat:last-child {
+      border-right: 0;
+    }
+
+    .quick-stat strong {
+      display: block;
+
+      font-size: 1.1rem;
+      color: var(--gold-light);
+    }
+
+    .quick-stat span {
+      display: block;
+
+      margin-top: 4px;
+
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    /* =========================
+       ABOUT
+    ========================= */
+
+    .philosophy {
+      max-width: 850px;
+      margin: auto;
+      text-align: center;
+    }
+
+    .philosophy blockquote {
+      font-size: clamp(1.6rem, 4vw, 2.7rem);
+      line-height: 1.35;
+      font-weight: 500;
+    }
+
+    .philosophy blockquote span {
+      color: var(--gold);
+    }
+
+    .philosophy p {
+      margin-top: 28px;
+      color: var(--muted);
+    }
+
+    /* =========================
+       TOKEN
+    ========================= */
+
+    .token-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .token-card {
+      padding: 28px;
+
+      border: 1px solid var(--border);
+      border-radius: 16px;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255, 255, 255, 0.055),
+          rgba(255, 255, 255, 0.018)
+        );
+    }
+
+    .token-card .label {
+      color: var(--muted);
+
+      font-size: 0.78rem;
+
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .token-card .value {
+      margin-top: 8px;
+
+      font-size: 1.15rem;
+      font-weight: 700;
+    }
+
+    .contract {
+      grid-column: 1 / -1;
+    }
+
+    .contract .value {
+      font-family: monospace;
+      color: var(--gold-light);
+      word-break: break-all;
+    }
+
+    .copy-contract {
+      margin-top: 17px;
+
+      border: 1px solid rgba(245, 196, 81, 0.3);
+      border-radius: 8px;
+
+      padding: 8px 13px;
+
+      background: rgba(245, 196, 81, 0.05);
+      color: var(--gold-light);
+
+      font-size: 0.8rem;
+    }
+
+    .copy-contract:hover {
+      background: rgba(245, 196, 81, 0.1);
+    }
+
+    /* =========================
+       LEARNING CENTER
+    ========================= */
+
+    .learning-section {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .learning-section::before {
+      content: "";
+
+      position: absolute;
+
+      width: 500px;
+      height: 500px;
+
+      left: -250px;
+      top: 250px;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(108, 140, 255, 0.08),
+          transparent 70%
+        );
+
+      pointer-events: none;
+    }
+
+    .learning-intro {
+      max-width: 850px;
+      margin: -20px auto 45px;
+
+      text-align: center;
+    }
+
+    .learning-intro p {
+      color: var(--muted);
+    }
+
+    .learning-tools {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+
+      margin-bottom: 35px;
+    }
+
+    .search-box {
+      position: relative;
+    }
+
+    .search-box input {
+      width: 100%;
+
+      padding: 16px 20px 16px 48px;
+
+      border: 1px solid var(--border);
+      border-radius: 13px;
+
+      outline: none;
+
+      background: rgba(255, 255, 255, 0.035);
+
+      color: var(--text);
+
+      transition: 0.25s ease;
+    }
+
+    .search-box input:focus {
+      border-color: rgba(245, 196, 81, 0.45);
+
+      box-shadow:
+        0 0 0 4px rgba(245, 196, 81, 0.05);
+    }
+
+    .search-box span {
+      position: absolute;
+
+      left: 17px;
+      top: 50%;
+
+      transform: translateY(-50%);
+
+      color: var(--muted);
+
+      font-size: 1.05rem;
+    }
+
+    .category-filters {
+      display: flex;
+
+      gap: 9px;
+
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .filter-button {
+      padding: 9px 15px;
+
+      border: 1px solid var(--border);
+      border-radius: 30px;
+
+      background: rgba(255, 255, 255, 0.025);
+
+      color: var(--muted);
+
+      font-size: 0.82rem;
+
+      transition: 0.25s ease;
+    }
+
+    .filter-button:hover,
+    .filter-button.active {
+      color: #111;
+
+      border-color: var(--gold);
+
+      background: var(--gold);
+    }
+
+    .learning-actions {
+      display: flex;
+
+      justify-content: space-between;
+      align-items: center;
+
+      gap: 15px;
+
+      margin-bottom: 20px;
+    }
+
+    .learning-count {
+      color: var(--muted);
+      font-size: 0.84rem;
+    }
+
+    .add-note-button {
+      border: 1px solid rgba(245, 196, 81, 0.35);
+      border-radius: 9px;
+
+      padding: 10px 15px;
+
+      background: rgba(245, 196, 81, 0.06);
+      color: var(--gold-light);
+
+      font-weight: 700;
+      font-size: 0.82rem;
+    }
+
+    .add-note-button:hover {
+      background: rgba(245, 196, 81, 0.12);
+    }
+
+    .learning-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+      gap: 18px;
+    }
+
+    .learning-card {
+      position: relative;
+
+      display: flex;
+      flex-direction: column;
+
+      min-height: 390px;
+
+      padding: 25px;
+
+      border: 1px solid var(--border);
+      border-radius: 18px;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255, 255, 255, 0.055),
+          rgba(255, 255, 255, 0.018)
+        );
+
+      transition:
+        transform 0.25s ease,
+        border-color 0.25s ease,
+        background 0.25s ease;
+
+      overflow: hidden;
+    }
+
+    .learning-card:hover {
+      transform: translateY(-5px);
+
+      border-color: rgba(245, 196, 81, 0.25);
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255, 255, 255, 0.075),
+          rgba(255, 255, 255, 0.025)
+        );
+    }
+
+    .learning-card.featured {
+      grid-column: span 2;
+    }
+
+    .learning-card-top {
+      display: flex;
+
+      justify-content: space-between;
+      align-items: center;
+
+      gap: 10px;
+
+      margin-bottom: 17px;
+    }
+
+    .category-tag {
+      display: inline-flex;
+
+      padding: 5px 10px;
+
+      border: 1px solid rgba(245, 196, 81, 0.22);
+      border-radius: 20px;
+
+      color: var(--gold-light);
+
+      background: rgba(245, 196, 81, 0.05);
+
+      font-size: 0.7rem;
+
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 750;
+    }
+
+    .difficulty {
+      color: var(--muted);
+      font-size: 0.72rem;
+    }
+
+    .learning-card h3 {
+      font-size: 1.35rem;
+      line-height: 1.25;
+    }
+
+    .learning-card-description {
+      margin-top: 11px;
+
+      color: var(--muted);
+
+      font-size: 0.9rem;
+    }
+
+    .chart-preview {
+      position: relative;
+
+      height: 170px;
+
+      margin: 20px 0;
+
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+
+      overflow: hidden;
+
+      background:
+        linear-gradient(
+          rgba(255, 255, 255, 0.035) 1px,
+          transparent 1px
+        ),
+        linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0.035) 1px,
+          transparent 1px
+        ),
+        #080c16;
+
+      background-size: 35px 35px;
+    }
+
+    .fib-level {
+      position: absolute;
+
+      left: 0;
+      right: 0;
+
+      height: 1px;
+
+      background: rgba(245, 196, 81, 0.65);
+    }
+
+    .fib-level span {
+      position: absolute;
+
+      left: 8px;
+      top: -12px;
+
+      padding: 2px 5px;
+
+      border-radius: 4px;
+
+      background: rgba(3, 5, 11, 0.75);
+
+      color: var(--gold-light);
+
+      font-size: 0.65rem;
+    }
+
+    .fib-level.l23 {
+      top: 78%;
+    }
+
+    .fib-level.l38 {
+      top: 64%;
+    }
+
+    .fib-level.l50 {
+      top: 50%;
+    }
+
+    .fib-level.l61 {
+      top: 36%;
+    }
+
+    .fib-level.l78 {
+      top: 22%;
+    }
+
+    .price-line {
+      position: absolute;
+
+      width: 95%;
+      height: 100%;
+
+      left: 2%;
+      top: 0;
+    }
+
+    .price-line svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .card-footer {
+      margin-top: auto;
+
+      display: flex;
+
+      justify-content: space-between;
+      align-items: center;
+
+      gap: 10px;
+    }
+
+    .read-button {
+      border: 0;
+
+      background: transparent;
+
+      color: var(--gold-light);
+
+      font-weight: 700;
+      font-size: 0.86rem;
+    }
+
+    .read-button:hover {
+      color: #fff;
+    }
+
+    .local-note-label {
+      color: var(--green);
+
+      font-size: 0.68rem;
+
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .empty-results {
+      grid-column: 1 / -1;
+
+      padding: 60px 20px;
+
+      text-align: center;
+
+      border: 1px dashed var(--border);
+      border-radius: 16px;
+
+      color: var(--muted);
+    }
+
+    /* =========================
+       VALUES
+    ========================= */
+
+    .values {
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+      gap: 18px;
+    }
+
+    .value-card {
+      padding: 32px 26px;
+
+      border: 1px solid var(--border);
+      border-radius: 16px;
+
+      background: var(--bg-card);
+    }
+
+    .value-number {
+      color: var(--gold);
+
+      font-size: 0.8rem;
+      font-weight: 800;
+
+      letter-spacing: 0.12em;
+    }
+
+    .value-card h3 {
+      margin: 14px 0 9px;
+
+      font-size: 1.25rem;
+    }
+
+    .value-card p {
+      color: var(--muted);
+
+      font-size: 0.94rem;
+    }
+
+    /* =========================
+       ROADMAP
+    ========================= */
+
+    .roadmap {
+      max-width: 800px;
+
+      margin: auto;
+
+      position: relative;
+    }
+
+    .roadmap::before {
+      content: "";
+
+      position: absolute;
+
+      left: 16px;
+      top: 0;
+      bottom: 0;
+
+      width: 1px;
+
+      background: rgba(245, 196, 81, 0.25);
+    }
+
+    .roadmap-item {
+      position: relative;
+
+      padding-left: 55px;
+
+      margin-bottom: 42px;
+    }
+
+    .roadmap-dot {
+      position: absolute;
+
+      left: 9px;
+      top: 4px;
+
+      width: 15px;
+      height: 15px;
+
+      border-radius: 50%;
+
+      background: var(--gold);
+
+      box-shadow:
+        0 0 20px rgba(245, 196, 81, 0.35);
+    }
+
+    .roadmap-item h3 {
+      font-size: 1.25rem;
+    }
+
+    .roadmap-item p {
+      margin-top: 7px;
+      color: var(--muted);
+    }
+
+    /* =========================
+       CTA
+    ========================= */
+
+    .cta {
+      text-align: center;
+      padding-bottom: 130px;
+    }
+
+    .cta-box {
+      padding: 70px 30px;
+
+      border: 1px solid rgba(245, 196, 81, 0.20);
+      border-radius: 24px;
+
+      background:
+        radial-gradient(
+          circle at center,
+          rgba(245, 196, 81, 0.09),
+          transparent 65%
+        );
+    }
+
+    .cta h2 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+    }
+
+    .cta p {
+      max-width: 600px;
+
+      margin: 18px auto 30px;
+
+      color: var(--muted);
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
+
+      padding: 40px 0;
+
+      text-align: center;
+
+      color: var(--muted);
+
+      font-size: 0.85rem;
+    }
+
+    footer strong {
+      color: var(--gold);
+    }
+
+    /* =========================
+       MODALS
+    ========================= */
+
+    .modal-overlay {
+      position: fixed;
+
+      inset: 0;
+
+      z-index: 2000;
+
+      display: none;
+
+      align-items: center;
+      justify-content: center;
+
+      padding: 20px;
+
+      background: rgba(0, 0, 0, 0.76);
+
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal {
+      position: relative;
+
+      width: min(850px, 100%);
+
+      max-height: 90vh;
+
+      overflow-y: auto;
+
+      border: 1px solid var(--border);
+
+      border-radius: 20px;
+
+      background:
+        linear-gradient(
+          145deg,
+          #0b101c,
+          #050811
+        );
+
+      box-shadow: var(--shadow);
+    }
+
+    .modal-header {
+      position: sticky;
+
+      top: 0;
+
+      z-index: 2;
+
+      display: flex;
+
+      justify-content: space-between;
+      align-items: flex-start;
+
+      gap: 20px;
+
+      padding: 28px;
+
+      border-bottom: 1px solid var(--border);
+
+      background: rgba(8, 12, 22, 0.92);
+
+      backdrop-filter: blur(14px);
+    }
+
+    .modal-header h2 {
+      font-size: clamp(1.6rem, 4vw, 2.3rem);
+
+      line-height: 1.2;
+    }
+
+    .modal-close {
+      flex-shrink: 0;
+
+      width: 38px;
+      height: 38px;
+
+      border: 1px solid var(--border);
+      border-radius: 9px;
+
+      background: rgba(255, 255, 255, 0.04);
+
+      color: var(--text);
+
+      font-size: 1.1rem;
+    }
+
+    .modal-close:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .modal-content {
+      padding: 30px;
+    }
+
+    .lesson-meta {
+      display: flex;
+
+      flex-wrap: wrap;
+
+      gap: 8px;
+
+      margin-bottom: 25px;
+    }
+
+    .lesson-section {
+      margin-top: 30px;
+    }
+
+    .lesson-section:first-child {
+      margin-top: 0;
+    }
+
+    .lesson-section h3 {
+      margin-bottom: 10px;
+
+      font-size: 1.2rem;
+
+      color: var(--gold-light);
+    }
+
+    .lesson-section p {
+      color: var(--muted);
+    }
+
+    .lesson-section ul {
+      padding-left: 20px;
+
+      color: var(--muted);
+    }
+
+    .lesson-section li {
+      margin-bottom: 7px;
+    }
+
+    .lesson-figure {
+      margin-top: 25px;
+
+      border: 1px solid var(--border);
+
+      border-radius: 15px;
+
+      overflow: hidden;
+
+      background: #080c16;
+    }
+
+    .lesson-figure-caption {
+      padding: 11px 15px;
+
+      border-top: 1px solid var(--border);
+
+      color: var(--muted);
+
+      font-size: 0.75rem;
+
+      text-align: center;
+    }
+
+    /* =========================
+       ADD NOTE FORM
+    ========================= */
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-group label {
+      display: block;
+
+      margin-bottom: 7px;
+
+      color: var(--text);
+
+      font-size: 0.84rem;
+
+      font-weight: 700;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+
+      border: 1px solid var(--border);
+      border-radius: 10px;
+
+      outline: none;
+
+      padding: 12px 14px;
+
+      background: rgba(255, 255, 255, 0.035);
+
+      color: var(--text);
+    }
+
+    .form-group select option {
+      background: #080c16;
+      color: var(--text);
+    }
+
+    .form-group textarea {
+      min-height: 120px;
+
+      resize: vertical;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: rgba(245, 196, 81, 0.45);
+
+      box-shadow:
+        0 0 0 4px rgba(245, 196, 81, 0.05);
+    }
+
+    .form-grid {
+      display: grid;
+
+      grid-template-columns: 1fr 1fr;
+
+      gap: 15px;
+    }
+
+    .form-actions {
+      display: flex;
+
+      justify-content: flex-end;
+
+      gap: 10px;
+
+      margin-top: 25px;
+    }
+
+    .form-note {
+      margin-top: 15px;
+
+      color: var(--muted);
+
+      font-size: 0.75rem;
+
+      line-height: 1.6;
+    }
+
+    /* =========================
+       TOAST
+    ========================= */
+
+    .toast {
+      position: fixed;
+
+      right: 20px;
+      bottom: 20px;
+
+      z-index: 3000;
+
+      max-width: 340px;
+
+      padding: 13px 17px;
+
+      border: 1px solid var(--border);
+
+      border-radius: 10px;
+
+      background: #0c1220;
+
+      color: var(--text);
+
+      box-shadow: var(--shadow);
+
+      transform: translateY(20px);
+
+      opacity: 0;
+
+      pointer-events: none;
+
+      transition: 0.3s ease;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media (max-width: 950px) {
+      .nav-links {
+        gap: 14px;
+      }
+
+      .learning-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .learning-card.featured {
+        grid-column: span 2;
+      }
+
+      .values {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 800px) {
+      .nav-links {
+        display: none;
+      }
+
+      .mobile-menu-button {
+        display: block;
+      }
+
+      section {
+        padding: 80px 0;
+      }
+
+      .hero {
+        min-height: 90vh;
+        padding-top: 120px;
+      }
+
+      .quick-stats {
+        grid-template-columns: 1fr;
+      }
+
+      .quick-stat {
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .quick-stat:last-child {
+        border-bottom: 0;
+      }
+
+      .token-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .contract {
+        grid-column: auto;
+      }
+
+      .learning-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .learning-card.featured {
+        grid-column: auto;
+      }
+
+      .values {
+        grid-template-columns: 1fr;
+      }
+
+      .learning-actions {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        width: min(var(--container), calc(100% - 28px));
+      }
+
+      .hero h1 {
+        font-size: clamp(3.4rem, 20vw, 6rem);
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .modal-header,
+      .modal-content {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================
+       NAVIGATION
+  ========================== -->
+
+  <nav>
+    <div class="container nav-inner">
+
+      <a href="#" class="logo">
+        US<span>WIN</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#token">Token</a></li>
+        <li><a href="#learning">Learning</a></li>
+        <li><a href="#philosophy">Philosophy</a></li>
+        <li><a href="#mission">Mission</a></li>
+
+        <li>
+          <a
+            href="https://pancakeswap.finance/swap?chain=bsc&outputCurrency=0x9ccf31F2031F1f3dBb7CE312f7415AE2d9678b95&inputCurrency=0x7130d2A12B9BCbFAe4f2634d864A1Ee1Ce3Ead9c"
+            class="nav-button"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            SWAP
+          </a>
+        </li>
+      </ul>
+
+      <button
+        class="mobile-menu-button"
+        id="mobileMenuButton"
+        aria-label="Open menu"
+      >
+        ☰
+      </button>
+
+    </div>
+
+    <div class="mobile-menu" id="mobileMenu">
+      <div class="container">
+        <a href="#about">About</a>
+        <a href="#token">Token</a>
+        <a href="#learning">Learning</a>
+        <a href="#philosophy">Philosophy</a>
+        <a href="#mission">Mission</a>
+
+        <a
+          href="https://pancakeswap.finance/swap?chain=bsc&outputCurrency=0x9ccf31F2031F1f3dBb7CE312f7415AE2d9678b95&inputCurrency=0x7130d2A12B9BCbFAe4f2634d864A1Ee1Ce3Ead9c"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          SWAP USWIN
+        </a>
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- =========================
+       HERO
+  ========================== -->
+
+  <header class="hero">
+
+    <div class="container hero-content">
+
+      <div class="badge">
+        Built on BNB Chain
+      </div>
+
+      <h1>USWIN</h1>
+
+      <h2>
+        <strong>Us Win.</strong>
+        When the community moves forward,
+        everyone moves forward.
+      </h2>
+
+      <p class="hero-description">
+        USWIN is a community-driven token and learning project
+        inspired by a simple idea: success becomes stronger when
+        knowledge, wisdom, innovation and participation come together.
+      </p>
+
+      <div class="hero-buttons">
+
+        <a href="#learning" class="button button-primary">
+          Explore Learning
+        </a>
+
+        <a
+          href="https://pancakeswap.finance/swap?chain=bsc&outputCurrency=0x9ccf31F2031F1f3dBb7CE312f7415AE2d9678b95&inputCurrency=0x7130d2A12B9BCbFAe4f2634d864A1Ee1Ce3Ead9c"
+          class="button button-secondary"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          SWAP USWIN
+        </a>
+
+      </div>
+
+      <div class="quick-stats">
+
+        <div class="quick-stat">
+          <strong>USWIN</strong>
+          <span>Token</span>
+        </div>
+
+        <div class="quick-stat">
+          <strong>BNB Chain</strong>
+          <span>Network</span>
+        </div>
+
+        <div class="quick-stat">
+          <strong>Knowledge → Action</strong>
+          <span>Community Philosophy</span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </header>
+
+
+  <!-- =========================
+       ABOUT
+  ========================== -->
+
+  <section id="about">
+
+    <div class="container">
+
+      <div class="section-heading">
+
+        <div class="eyebrow">
+          About USWIN
+        </div>
+
+        <h2>A Community That Moves Together</h2>
+
+        <p>
+          USWIN stands for "Us Win" — a mindset built around
+          collective progress, open participation and community strength.
+        </p>
+
+      </div>
+
+      <div class="philosophy">
+
+        <blockquote>
+          "When the community wins,
+          <span>we all win.</span>"
+        </blockquote>
+
+        <p>
+          USWIN was created as a learning journey and community project.
+          The vision is to improve step by step, adapt to new opportunities
+          and grow together within the evolving blockchain ecosystem.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       TOKEN
+  ========================== -->
+
+  <section id="token">
+
+    <div class="container">
+
+      <div class="section-heading">
+
+        <div class="eyebrow">
+          Token
+        </div>
+
+        <h2>USWIN Coin</h2>
+
+        <p>
+          The core token of the USWIN community.
+        </p>
+
+      </div>
+
+      <div class="token-grid">
+
+        <div class="token-card">
+          <div class="label">Token</div>
+          <div class="value">USWIN</div>
+        </div>
+
+        <div class="token-card">
+          <div class="label">Network</div>
+          <div class="value">BNB Chain</div>
+        </div>
+
+        <div class="token-card">
+          <div class="label">Trading Pairs</div>
+          <div class="value">
+            USWIN / BNB · USWIN / USDT
+          </div>
+        </div>
+
+        <div class="token-card contract">
+
+          <div class="label">
+            Contract Address
+          </div>
+
+          <div class="value" id="contractAddress">
+            0x9ccf31f2031f1f3dbb7ce312f7415ae2d9678b95
+          </div>
+
+          <button
+            class="copy-contract"
+            id="copyContract"
+          >
+            Copy Contract
+          </button>
+
+          <div style="margin-top: 15px;">
+
+            <a
+              href="https://bscscan.com/token/0x9ccf31f2031f1f3dbb7ce312f7415ae2d9678b95"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="button button-secondary"
+              style="padding: 9px 14px; font-size: 0.8rem;"
+            >
+              View on BscScan
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       LEARNING CENTER
+  ========================== -->
+
+  <section id="learning" class="learning-section">
+
+    <div class="container">
+
+      <div class="section-heading">
+
+        <div class="eyebrow">
+          USWIN Learning Center
+        </div>
+
+        <h2>Learn. Understand. Apply.</h2>
+
+        <p>
+          A growing knowledge library covering tools, indicators,
+          patterns, price action, risk management and blockchain concepts.
+        </p>
+
+      </div>
+
+      <div class="learning-intro">
+
+        <p>
+          Knowledge is the first step.
+          Wisdom comes from understanding.
+          Action comes from applying what we learn responsibly.
+        </p>
+
+        <p style="margin-top: 12px; font-size: 0.84rem;">
+          <strong style="color: var(--text);">USWIN Academy — Educational Resources.</strong>
+          These notes are based on the USWIN COIN document and are provided
+          for learning and market education, not as financial advice.
+        </p>
+
+      </div>
+
+
+      <!-- SEARCH -->
+
+      <div class="learning-tools">
+
+        <div class="search-box">
+
+          <span>⌕</span>
+
+          <input
+            type="search"
+            id="learningSearch"
+            placeholder="Search learning notes..."
+            autocomplete="off"
+          />
+
+        </div>
+
+        <div
+          class="category-filters"
+          id="categoryFilters"
+        >
+
+          <button
+            class="filter-button active"
+            data-category="All"
+          >
+            All
+          </button>
+
+          <button
+            class="filter-button"
+            data-category="Tools"
+          >
+            Tools
+          </button>
+
+          <button
+            class="filter-button"
+            data-category="Indicators"
+          >
+            Indicators
+          </button>
+
+          <button
+            class="filter-button"
+            data-category="Patterns"
+          >
+            Patterns
+          </button>
+
+          <button
+            class="filter-button"
+            data-category="Price Action"
+          >
+            Price Action
+          </button>
+
+          <button
+            class="filter-button"
+            data-category="Risk"
+          >
+            Risk
+          </button>
+
+          <button
+            class="filter-button"
+            data-category="Blockchain"
+          >
+            Blockchain
+          </button>
+
+          <button
+            class="filter-button"
+            data-category="Trading"
+          >
+            Trading
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- ACTION BAR -->
+
+      <div class="learning-actions">
+
+        <div
+          class="learning-count"
+          id="learningCount"
+        >
+          Showing learning notes
+        </div>
+
+        <button
+          class="add-note-button"
+          id="addNoteButton"
+        >
+          + Add Learning Note
+        </button>
+
+      </div>
+
+
+      <!-- LEARNING CARDS -->
+
+      <div
+        class="learning-grid"
+        id="learningGrid"
+      ></div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       PHILOSOPHY
+  ========================== -->
+
+  <section id="philosophy">
+
+    <div class="container">
+
+      <div class="section-heading">
+
+        <div class="eyebrow">
+          The USWIN Philosophy
+        </div>
+
+        <h2>Knowledge → Wisdom → Action</h2>
+
+      </div>
+
+      <div class="philosophy">
+
+        <blockquote>
+          Growth begins with
+          <span>knowledge, wisdom and action.</span>
+        </blockquote>
+
+        <p>
+          USWIN aims to encourage continuous learning and personal
+          development while exploring the possibilities of blockchain
+          technology and community participation.
+        </p>
+
+        <p>
+          Innovation is embraced alongside wisdom and intuition.
+          Together, technology, learning and community create an
+          environment where people can explore, share knowledge
+          and grow.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       VALUES
+  ========================== -->
+
+  <section id="values">
+
+    <div class="container">
+
+      <div class="section-heading">
+
+        <div class="eyebrow">
+          What We Believe
+        </div>
+
+        <h2>The USWIN Values</h2>
+
+      </div>
+
+      <div class="values">
+
+        <div class="value-card">
+          <div class="value-number">01</div>
+
+          <h3>Learning</h3>
+
+          <p>
+            Understanding markets, blockchain technology and
+            decentralized ecosystems through continuous learning.
+          </p>
+        </div>
+
+        <div class="value-card">
+          <div class="value-number">02</div>
+
+          <h3>Wisdom</h3>
+
+          <p>
+            Combining knowledge and experience with thoughtful
+            decision-making.
+          </p>
+        </div>
+
+        <div class="value-card">
+          <div class="value-number">03</div>
+
+          <h3>Intuition</h3>
+
+          <p>
+            Recognizing the value of intuition alongside technology,
+            information and analysis.
+          </p>
+        </div>
+
+        <div class="value-card">
+          <div class="value-number">04</div>
+
+          <h3>Innovation</h3>
+
+          <p>
+            Exploring new ideas and opportunities within the evolving
+            blockchain ecosystem.
+          </p>
+        </div>
+
+        <div class="value-card">
+          <div class="value-number">05</div>
+
+          <h3>Transparency</h3>
+
+          <p>
+            Building trust through open communication and transparent
+            project development.
+          </p>
+        </div>
+
+        <div class="value-card">
+          <div class="value-number">06</div>
+
+          <h3>Community</h3>
+
+          <p>
+            Creating collective strength through participation,
+            collaboration and shared growth.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       FUTURE MISSION
+  ========================== -->
+
+  <section id="mission">
+
+    <div class="container">
+
+      <div class="section-heading">
+
+        <div class="eyebrow">
+          Future Mission
+        </div>
+
+        <h2>Growing Step by Step</h2>
+
+        <p>
+          The long-term mission of USWIN is to build a positive,
+          transparent community centered on learning, innovation,
+          wisdom, intuition and participation.
+        </p>
+
+      </div>
+
+      <div class="roadmap">
+
+        <div class="roadmap-item">
+
+          <div class="roadmap-dot"></div>
+
+          <h3>Community Growth</h3>
+
+          <p>
+            Expand the USWIN community through shared wisdom,
+            intuition and collective growth.
+          </p>
+
+        </div>
+
+        <div class="roadmap-item">
+
+          <div class="roadmap-dot"></div>
+
+          <h3>Blockchain Education</h3>
+
+          <p>
+            Increase awareness of blockchain technology and
+            decentralized finance.
+          </p>
+
+        </div>
+
+        <div class="roadmap-item">
+
+          <div class="roadmap-dot"></div>
+
+          <h3>Learning Center</h3>
+
+          <p>
+            Build a growing knowledge library covering technical
+            analysis, blockchain concepts, tools and market education.
+          </p>
+
+        </div>
+
+        <div class="roadmap-item">
+
+          <div class="roadmap-dot"></div>
+
+          <h3>Transparency</h3>
+
+          <p>
+            Maintain transparent project development and
+            communication.
+          </p>
+
+        </div>
+
+        <div class="roadmap-item">
+
+          <div class="roadmap-dot"></div>
+
+          <h3>Market Accessibility</h3>
+
+          <p>
+            Strengthen liquidity and market accessibility through
+            community participation.
+          </p>
+
+        </div>
+
+        <div class="roadmap-item">
+
+          <div class="roadmap-dot"></div>
+
+          <h3>Future Utilities</h3>
+
+          <p>
+            Explore future utilities and ecosystem opportunities
+            that may add value to the USWIN community.
+          </p>
+
+        </div>
+
+        <div class="roadmap-item">
+
+          <div class="roadmap-dot"></div>
+
+          <h3>Collaboration</h3>
+
+          <p>
+            Encourage collaboration among holders, developers,
+            creators and supporters.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       CTA
+  ========================== -->
+
+  <section class="cta">
+
+    <div class="container">
+
+      <div class="cta-box">
+
+        <h2>
+          When We Move Together,
+          <br />
+          US WIN.
+        </h2>
+
+        <p>
+          Join the journey of learning, building and growing
+          with the USWIN community.
+        </p>
+
+        <div class="hero-buttons">
+
+          <a
+            href="#learning"
+            class="button button-primary"
+          >
+            Explore Learning
+          </a>
+
+          <a
+            href="https://pancakeswap.finance/swap?chain=bsc&outputCurrency=0x9ccf31F2031F1f3dBb7CE312f7415AE2d9678b95&inputCurrency=0x7130d2A12B9BCbFAe4f2634d864A1Ee1Ce3Ead9c"
+            class="button button-secondary"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            SWAP USWIN
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       FOOTER
+  ========================== -->
+
+  <footer>
+
+    <div class="container">
+
+      <p>
+        <strong>USWIN</strong> — Us Win.
+      </p>
+
+      <p>
+        A community project built around learning,
+        wisdom, innovation and collective growth.
+      </p>
+
+      <p style="margin-top: 15px;">
+        © 2026 USWIN
+      </p>
+
+    </div>
+
+  </footer>
+
+
+  <!-- =========================
+       LESSON MODAL
+  ========================== -->
+
+  <div
+    class="modal-overlay"
+    id="lessonModal"
+  >
+
+    <div class="modal">
+
+      <div class="modal-header">
+
+        <div>
+          <div
+            class="category-tag"
+            id="modalCategory"
+          >
+            Tools
+          </div>
+
+          <h2
+            id="modalTitle"
+            style="margin-top: 10px;"
+          >
+            Fibonacci Retracement
+          </h2>
+        </div>
+
+        <button
+          class="modal-close"
+          id="lessonModalClose"
+          aria-label="Close lesson"
+        >
+          ×
+        </button>
+
+      </div>
+
+      <div
+        class="modal-content"
+        id="modalContent"
+      ></div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       ADD NOTE MODAL
+  ========================== -->
+
+  <div
+    class="modal-overlay"
+    id="addNoteModal"
+  >
+
+    <div class="modal">
+
+      <div class="modal-header">
+
+        <div>
+
+          <div class="category-tag">
+            USWIN Learning Center
+          </div>
+
+          <h2 style="margin-top: 10px;">
+            Add Learning Note
+          </h2>
+
+        </div>
+
+        <button
+          class="modal-close"
+          id="addNoteModalClose"
+          aria-label="Close add note"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <div class="modal-content">
+
+        <form id="addNoteForm">
+
+          <div class="form-group">
+
+            <label for="noteTitle">
+              Title
+            </label>
+
+            <input
+              type="text"
+              id="noteTitle"
+              placeholder="e.g. Fibonacci Retracement"
+              required
+            />
+
+          </div>
+
+
+          <div class="form-grid">
+
+            <div class="form-group">
+
+              <label for="noteCategory">
+                Category
+              </label>
+
+              <select
+                id="noteCategory"
+                required
+              >
+
+                <option value="Tools">
+                  Tools
+                </option>
+
+                <option value="Indicators">
+                  Indicators
+                </option>
+
+                <option value="Patterns">
+                  Patterns
+                </option>
+
+                <option value="Price Action">
+                  Price Action
+                </option>
+
+                <option value="Risk">
+                  Risk
+                </option>
+
+                <option value="Blockchain">
+                  Blockchain
+                </option>
+
+                <option value="Trading">
+                  Trading
+                </option>
+
+              </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label for="noteDifficulty">
+                Difficulty
+              </label>
+
+              <select
+                id="noteDifficulty"
+                required
+              >
+
+                <option value="Beginner">
+                  Beginner
+                </option>
+
+                <option value="Intermediate">
+                  Intermediate
+                </option>
+
+                <option value="Advanced">
+                  Advanced
+                </option>
+
+              </select>
+
+            </div>
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="noteDescription">
+              Short Description
+            </label>
+
+            <textarea
+              id="noteDescription"
+              placeholder="Briefly explain what this topic is about..."
+              required
+            ></textarea>
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="noteWhat">
+              What is it?
+            </label>
+
+            <textarea
+              id="noteWhat"
+              placeholder="Explain the concept..."
+              required
+            ></textarea>
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="noteHow">
+              How to use it
+            </label>
+
+            <textarea
+              id="noteHow"
+              placeholder="Explain the steps or application..."
+            ></textarea>
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="noteKey">
+              Key Points
+            </label>
+
+            <textarea
+              id="noteKey"
+              placeholder="Add important levels, concepts or things to remember..."
+            ></textarea>
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="noteExample">
+              Example
+            </label>
+
+            <textarea
+              id="noteExample"
+              placeholder="Add an example or interpretation..."
+            ></textarea>
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="noteImportant">
+              Important Note
+            </label>
+
+            <textarea
+              id="noteImportant"
+              placeholder="Add limitations, warnings or educational notes..."
+            ></textarea>
+
+          </div>
+
+
+          <div class="form-actions">
+
+            <button
+              type="button"
+              class="button button-secondary"
+              id="cancelAddNote"
+            >
+              Cancel
+            </button>
+
+            <button
+              type="submit"
+              class="button button-primary"
+            >
+              Publish Note
+            </button>
+
+          </div>
+
+          <p class="form-note">
+            Notes created here are stored locally in this browser.
+            This is a prototype editor for the USWIN Learning Center.
+            A future backend can make published notes available to everyone.
+          </p>
+
+        </form>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       TOAST
+  ========================== -->
+
+  <div
+    class="toast"
+    id="toast"
+  ></div>
+
+
+  <!-- =========================
+       JAVASCRIPT
+  ========================== -->
+
+  <script>
+
+    /* ==========================================
+       USWIN LEARNING DATA
+    ========================================== */
+
+    const defaultLessons = [
+        {
+                "id": "candlesticks",
+                "title": "Anatomy of a Candlestick",
+                "category": "Price Action",
+                "difficulty": "Beginner",
+                "description": "Learn how candlestick bodies and shadows describe opening, closing, high and low prices.",
+                "what": "A candlestick contains a body showing the range between the opening and closing price, plus wicks or shadows showing the highest and lowest prices reached during the period.",
+                "how": "Identify the body first, then examine the upper and lower shadows. A bullish candle closes higher than it opens, while a bearish candle closes lower than it opens. Interpret candles in the context of the market trend.",
+                "keyPoints": [
+                        "Body — opening-to-closing range",
+                        "Wick/Shadow — highest and lowest prices",
+                        "Upper shadow — how far buyers pushed price before sellers regained control",
+                        "Lower shadow — depth of selling pressure before buyers stepped in",
+                        "Bullish candle — closes higher than it opens",
+                        "Bearish candle — closes lower than it opens",
+                        "Use trend and support/resistance or volume for context"
+                ],
+                "example": "A single bullish or bearish candle is more informative when viewed with the surrounding trend and nearby support or resistance.",
+                "important": "The PDF recommends identifying the trend and confirming candlestick patterns with context rather than interpreting a candle in isolation."
+        },
+        {
+                "id": "pivot-point",
+                "title": "Pivot Point",
+                "category": "Tools",
+                "difficulty": "Intermediate",
+                "description": "A reference level used to study market sentiment and potential support or resistance.",
+                "what": "The pivot point represents a level that can behave as support or resistance depending on market conditions. Price trading above or below it can indicate overall market sentiment.",
+                "how": "Use the pivot point together with the calculated support and resistance levels. Observe whether price is trading above or below the pivot and how it behaves around the associated levels.",
+                "keyPoints": [
+                        "Can act as support or resistance",
+                        "Trading above or below can indicate market sentiment",
+                        "Support/resistance levels derived from the pivot may be used as exit references",
+                        "The PDF describes these levels as rarely being entry signals"
+                ],
+                "example": "In an up-trending market, a move through the pivot may lead an analyst to monitor the first resistance level as a possible target area.",
+                "important": "Pivot levels are analytical references, not guaranteed reversal or entry signals."
+        },
+        {
+                "id": "support-resistance",
+                "title": "Support & Resistance",
+                "category": "Price Action",
+                "difficulty": "Beginner",
+                "description": "Identify areas where price has historically tended to stop, react or reverse.",
+                "what": "Support is an area where price tends to find buying interest while moving down. Resistance is an area where price tends to find selling interest while moving up.",
+                "how": "Study previous price reactions and identify meaningful support and resistance areas. Observe whether price bounces from or breaks through those areas.",
+                "keyPoints": [
+                        "Support can act as a floor for price",
+                        "Resistance can act as a ceiling for price",
+                        "A broken support may lead price toward another support",
+                        "A broken resistance may lead price toward another resistance",
+                        "Former resistance can become support and vice versa"
+                ],
+                "example": "If price repeatedly reacts near a particular area before moving higher, that area can be studied as potential support.",
+                "important": "Support and resistance are areas of price behavior, not guarantees that price will reverse."
+        },
+        {
+                "id": "breakout",
+                "title": "Breakout",
+                "category": "Price Action",
+                "difficulty": "Beginner",
+                "description": "Understand when price passes through and remains beyond a support or resistance area.",
+                "what": "A breakout occurs when price passes through and stays through an area of support or resistance, or exits an established chart pattern.",
+                "how": "Mark the relevant support, resistance or pattern boundary and observe whether price moves through it and sustains the move.",
+                "keyPoints": [
+                        "Can occur through support or resistance",
+                        "Can occur when price exits a chart pattern",
+                        "Context and confirmation matter",
+                        "A breakout can change how a level is interpreted"
+                ],
+                "example": "When price moves above a well-observed resistance area and remains there, analysts may study the move as a potential breakout.",
+                "important": "The PDF defines a breakout by price passing through and staying through an area; avoid treating every brief wick beyond a level as confirmation."
+        },
+        {
+                "id": "market-trend",
+                "title": "Market Trend",
+                "category": "Price Action",
+                "difficulty": "Beginner",
+                "description": "Understand how markets are classified by their directional movement across different time frames.",
+                "what": "A market trend is a tendency for a financial market to move in a particular direction over time. The PDF describes secular, primary and secondary trends across long, medium and short time frames.",
+                "how": "First determine whether the market is generally moving upward, downward or sideways, then interpret chart tools and patterns within that context.",
+                "keyPoints": [
+                        "Bull market — upward trend",
+                        "Bear market — downward trend",
+                        "Secular — long time frame",
+                        "Primary — medium time frame",
+                        "Secondary — short time frame",
+                        "Technical analysis studies trends through price behavior around support and resistance"
+                ],
+                "example": "A bullish trend may influence how an analyst interprets a temporary decline toward a support area.",
+                "important": "Trend classification depends on the time frame being studied."
+        },
+        {
+                "id": "fib-retracement-pdf",
+                "title": "Fibonacci Retracement",
+                "category": "Tools",
+                "difficulty": "Intermediate",
+                "description": "Use Fibonacci ratios to study potential retracement areas during corrections or counter-trend moves.",
+                "what": "The Fibonacci retracement tool is created by drawing a trend line between two extreme points and dividing the vertical distance using Fibonacci ratios. The PDF highlights levels such as 23.6%, 38.2%, 61.8% and 100%.",
+                "how": "Select two significant extreme points of a price move and draw the retracement tool between them. Observe price behavior around the resulting levels.",
+                "keyPoints": [
+                        "Common levels include 23.6%, 38.2%, 61.8% and 100%",
+                        "Values between 0 and 1 are internal retracement levels",
+                        "Values greater than 1 are external retracement levels",
+                        "Levels can be studied as potential support or resistance",
+                        "A former resistance can become support and vice versa"
+                ],
+                "example": "After an advance, price may retrace toward a Fibonacci level. The level can then be observed together with the broader price structure.",
+                "important": "Fibonacci levels are reference areas for analysis, not guaranteed future price movements."
+        },
+        {
+                "id": "fib-extension",
+                "title": "Trend-Based Fibonacci Extension",
+                "category": "Tools",
+                "difficulty": "Intermediate",
+                "description": "Project potential price levels beyond the original move using three-point Fibonacci extensions.",
+                "what": "Fibonacci extensions can be used to establish potential profit targets or estimate how far a price move may travel. Extension levels may also become areas where price reverses.",
+                "how": "Choose three points: the start of the move, the end of the move, and the end of the retracement. The tool then projects Fibonacci-based levels beyond the original movement.",
+                "keyPoints": [
+                        "Uses three points",
+                        "Projects levels beyond the original move",
+                        "Can help study potential targets",
+                        "Extension levels may become areas of reversal"
+                ],
+                "example": "After a move and its retracement, the third point can be used to project possible extension areas for further analysis.",
+                "important": "Projected levels are analytical reference points, not guaranteed targets."
+        },
+        {
+                "id": "fib-fan",
+                "title": "Fibonacci Speed Resistance Fan",
+                "category": "Tools",
+                "difficulty": "Advanced",
+                "description": "Study trend corrections, support/resistance and the speed of a trend with fan lines.",
+                "what": "A speed resistance fan combines a trend line with speed resistance lines based on time/price percentages of the distance between the beginning and end of a trend line.",
+                "how": "Draw the trend line between the relevant points and observe the fan lines. The PDF notes that one-third and two-thirds are commonly used percentages and Fibonacci ratios are frequently applied.",
+                "keyPoints": [
+                        "Helps study support and resistance",
+                        "Can indicate potential correction levels",
+                        "Can be used to examine trend speed",
+                        "One-third and two-thirds are commonly referenced",
+                        "Fan lines may change role between support and resistance"
+                ],
+                "example": "In an uptrend, price may remain above a higher speed line; if it falls through that line, the lower line can become an area of interest.",
+                "important": "Fan lines are technical-analysis tools and require context from the underlying trend."
+        },
+        {
+                "id": "fib-arcs",
+                "title": "Fibonacci Speed Resistance Arcs",
+                "category": "Tools",
+                "difficulty": "Advanced",
+                "description": "Use Fibonacci-based arcs to study trend direction, reversal speed and support/resistance.",
+                "what": "Fibonacci speed resistance arcs are used in technical analysis to examine the direction and speed of trend reversals and potential support/resistance levels.",
+                "how": "Draw a trend line between the high and low points of a trend. The arcs are then created to intersect the trend or speed line at selected percentage distances.",
+                "keyPoints": [
+                        "Study trend reversal direction",
+                        "Study trend reversal speed",
+                        "Can indicate support/resistance",
+                        "Built from a trend line and selected percentage distances"
+                ],
+                "example": "An analyst can observe how price behaves as it approaches or crosses one of the arcs.",
+                "important": "The PDF presents arcs as an analytical drawing tool rather than a guaranteed reversal system."
+        },
+        {
+                "id": "gann-square",
+                "title": "Gann Square",
+                "category": "Tools",
+                "difficulty": "Advanced",
+                "description": "Explore time-and-price symmetry using an advanced Gann charting tool.",
+                "what": "The Gann Square is a technical-analysis tool associated with W.D. Gann and based on time and price symmetry. The PDF describes it as an advanced tool requiring knowledge of Gann theory and charting experience.",
+                "how": "Use an appropriate scale so price and time maintain the required relationship. The PDF describes approaches beginning from a major pivot point or using geometric formations to study potential support and resistance.",
+                "keyPoints": [
+                        "Based on time and price symmetry",
+                        "Requires correct chart scaling",
+                        "Associated with the Gann wheel, fan and box",
+                        "Can be used to study geometric formations",
+                        "Advanced tool requiring experience"
+                ],
+                "example": "An analyst may start from a previous major pivot point and study how the 1 × 1 relationship aligns with market support areas.",
+                "important": "The PDF specifically warns that proper scaling is important when working with Gann drawings."
+        },
+        {
+                "id": "position-tools",
+                "title": "Long & Short Position Tools",
+                "category": "Risk",
+                "difficulty": "Intermediate",
+                "description": "Visualize an entry, potential profit zone, loss zone and risk/reward relationship on a chart.",
+                "what": "The long position tool allows an entry point to be set for a long position, while the short position tool does the same for a short position. The tools display profit and loss zones that can be adjusted.",
+                "how": "Set the entry point, then adjust the profit and loss areas to represent the intended risk/reward relationship.",
+                "keyPoints": [
+                        "Long tool — studies a long-position setup",
+                        "Short tool — studies a short-position setup",
+                        "Green area represents the profit zone in the PDF's description",
+                        "Red area represents the loss zone",
+                        "Zones can be adjusted to change the risk/reward ratio"
+                ],
+                "example": "Before considering a trade idea, an analyst can visually compare the potential profit area with the potential loss area.",
+                "important": "These drawing tools visualize a setup; they do not make the trade safe or guarantee the outcome."
+        },
+        {
+                "id": "cmo",
+                "title": "Chande Momentum Oscillator (CMO)",
+                "category": "Indicators",
+                "difficulty": "Advanced",
+                "description": "Study momentum using an oscillator designed to track recent gains and losses.",
+                "what": "The Chande Momentum Oscillator is a momentum indicator designed to track movement and momentum. The PDF describes it as using the difference between recent gains and losses divided by the total price movement over the same period, usually 20 periods.",
+                "how": "Add the CMO to a chart and study its momentum readings alongside price movement and the broader market structure.",
+                "keyPoints": [
+                        "Momentum indicator",
+                        "Tracks movement and momentum",
+                        "Compares recent gains and losses",
+                        "The PDF describes a typical 20-period calculation"
+                ],
+                "example": "CMO can be observed alongside price structure to study whether recent price movement is gaining or losing momentum.",
+                "important": "The PDF describes the indicator's calculation and purpose but does not define a standalone buy or sell rule."
+        },
+        {
+                "id": "exchanges",
+                "title": "Centralized Exchanges (CEX)",
+                "category": "Blockchain",
+                "difficulty": "Beginner",
+                "description": "Understand the centralized-exchange category and the platforms listed in the USWIN document.",
+                "what": "The PDF introduces centralized exchanges as crypto trading platforms and lists Binance, Bitget, KuCoin, Bybit, OKX, Coinbase, Kraken and Dextrade.",
+                "how": "Use the exchange category as a starting point for learning about spot, derivatives and other services. Always verify current availability and supported assets directly with a platform before using it.",
+                "keyPoints": [
+                        "Binance",
+                        "Bitget",
+                        "KuCoin",
+                        "Bybit",
+                        "OKX",
+                        "Coinbase",
+                        "Kraken",
+                        "Dextrade"
+                ],
+                "example": "A learner can compare which trading services, assets and account features are offered by the platforms listed in the PDF.",
+                "important": "The exchange descriptions in the PDF are educational and may become outdated as platforms, services and regulations change."
+        },
+        {
+                "id": "pancakeswap",
+                "title": "Decentralized Exchanges (DEX)",
+                "category": "Blockchain",
+                "difficulty": "Beginner",
+                "description": "Learn the role of decentralized exchanges in on-chain trading, with PancakeSwap as the PDF's example.",
+                "what": "The PDF describes PancakeSwap as a decentralized exchange and DeFi application suite built on BNB Smart Chain, enabling users to trade BEP-20 tokens and participate in other on-chain products.",
+                "how": "Learn the difference between centralized and decentralized exchanges, then understand wallets, networks, token standards and transaction confirmation before interacting with a DEX.",
+                "keyPoints": [
+                        "PancakeSwap",
+                        "BNB Smart Chain",
+                        "BEP-20 token trading",
+                        "Decentralized finance (DeFi)",
+                        "On-chain transactions"
+                ],
+                "example": "USWIN's site provides a PancakeSwap swap link for the USWIN contract on BNB Chain.",
+                "important": "Always verify the token contract, network and transaction details before signing an on-chain transaction."
+        },
+        {
+                "id": "wallets",
+                "title": "Crypto Wallets",
+                "category": "Blockchain",
+                "difficulty": "Beginner",
+                "description": "Understand the wallet tools named in the USWIN document and the basics of self-custody.",
+                "what": "The PDF introduces MetaMask as a self-custodial Web3 wallet and Trust Wallet as a non-custodial mobile wallet for managing digital assets and interacting with decentralized applications.",
+                "how": "Learn how wallet addresses, private keys and recovery phrases work. Verify the blockchain network and destination address before sending assets or signing transactions.",
+                "keyPoints": [
+                        "MetaMask",
+                        "Trust Wallet",
+                        "Self-custody / non-custody concepts",
+                        "Wallets can interact with decentralized applications",
+                        "Verify network and destination before sending"
+                ],
+                "example": "A learner can use a wallet interface to connect to a decentralized application after independently verifying the website and network.",
+                "important": "Never share a private key or recovery phrase. The USWIN website does not need these credentials."
+        },
+        {
+                "id": "spot-trading",
+                "title": "Spot Trading",
+                "category": "Trading",
+                "difficulty": "Beginner",
+                "description": "Learn the basic idea of buying and selling the underlying crypto asset without leverage by default.",
+                "what": "The PDF describes spot trading as buying and owning the actual asset, such as BTC, ETH or USWIN, with profit or loss depending on subsequent price movement.",
+                "how": "Understand the asset being purchased, the entry price, the amount purchased and the conditions under which it might later be sold.",
+                "keyPoints": [
+                        "You buy and own the actual asset",
+                        "No leverage by default",
+                        "Profit or loss depends on price movement",
+                        "The PDF presents spot as the lowest-risk category among the listed trading products"
+                ],
+                "example": "The PDF gives an example of buying 1 BTC at $100,000 and selling at $110,000 for a $10,000 price difference before fees.",
+                "important": "The PDF's risk comparison does not mean spot trading is risk-free; crypto prices can move substantially."
+        },
+        {
+                "id": "futures-trading",
+                "title": "Futures Trading",
+                "category": "Trading",
+                "difficulty": "Advanced",
+                "description": "Understand contracts, directional exposure and leverage in futures markets.",
+                "what": "The PDF describes futures as contracts based on an asset's price rather than ownership of the asset. It notes that futures can be used for rising or falling markets and commonly involve leverage.",
+                "how": "First understand contract size, margin, leverage and liquidation risk before considering futures. Treat the position size and potential loss as separate from the underlying asset's spot price.",
+                "keyPoints": [
+                        "Contracts rather than direct ownership",
+                        "Can provide exposure to rising or falling prices",
+                        "Leverage can magnify gains and losses",
+                        "Examples in the PDF include 5×, 10×, 50× and 100× leverage"
+                ],
+                "example": "The PDF states that with 10× leverage, a 10% price move can create roughly a 100% gain or loss on the margin.",
+                "important": "Futures carry much higher risk than spot in the PDF's comparison. Leverage can cause rapid losses."
+        },
+        {
+                "id": "margin-trading",
+                "title": "Margin Trading",
+                "category": "Trading",
+                "difficulty": "Advanced",
+                "description": "Learn the concept of borrowing funds to increase the size of a trading position.",
+                "what": "The PDF describes margin trading as borrowing funds from an exchange to increase position size. It can support long and short positions on many platforms.",
+                "how": "Understand borrowed funds, collateral, interest, margin requirements and the consequences of adverse price movement before using margin.",
+                "keyPoints": [
+                        "Uses borrowed funds",
+                        "Increases position size",
+                        "Can support long and short positions",
+                        "Adds additional risk through borrowing"
+                ],
+                "example": "A trader using borrowed funds can have a larger market exposure than the amount of capital deposited as collateral.",
+                "important": "The PDF presents margin as a leveraged form of trading; losses can be amplified."
+        },
+        {
+                "id": "options-trading",
+                "title": "Options Trading",
+                "category": "Trading",
+                "difficulty": "Advanced",
+                "description": "Understand the basic concept of rights to trade an asset at a specified price and time.",
+                "what": "The PDF describes options as contracts that give the buyer or seller a right, but not an obligation, to trade an asset at a specific price before a certain date.",
+                "how": "Learn the difference between calls and puts, strike price, expiry, premium and the obligations of each side before attempting options trading.",
+                "keyPoints": [
+                        "Right, not obligation, for the option holder",
+                        "Specific price",
+                        "Specific time or expiry",
+                        "More complex than spot and futures",
+                        "Used by advanced traders and institutions"
+                ],
+                "example": "An options contract can provide exposure to a particular price level without being identical to owning the underlying asset.",
+                "important": "The PDF identifies options as more complex; the site should present this topic as education rather than a trading recommendation."
+        },
+        {
+                "id": "copy-trading",
+                "title": "Copy Trading",
+                "category": "Trading",
+                "difficulty": "Beginner",
+                "description": "Understand the concept of automatically copying another trader's positions.",
+                "what": "Copy trading allows a user to automatically copy trades from another trader. The PDF mentions platforms such as Bybit and Binance as examples.",
+                "how": "Study the trader's strategy, historical performance, risk profile and position sizing before considering copy trading.",
+                "keyPoints": [
+                        "Trades can be copied automatically",
+                        "Available on some exchanges",
+                        "Results depend heavily on the trader followed",
+                        "Past performance does not guarantee future results"
+                ],
+                "example": "A copy-trading account may mirror the entry and exit actions of a selected trader according to the platform's settings.",
+                "important": "Copying another trader does not remove market risk."
+        },
+        {
+                "id": "p2p",
+                "title": "P2P Trading",
+                "category": "Trading",
+                "difficulty": "Beginner",
+                "description": "Learn the peer-to-peer model for buying and selling crypto directly with other users.",
+                "what": "The PDF describes P2P as buying and selling crypto directly with other users, often for local-currency deposits and withdrawals, with the exchange acting as an escrow service.",
+                "how": "Understand the platform's escrow, payment and dispute process. Verify the counterparty and payment status before releasing assets.",
+                "keyPoints": [
+                        "Peer-to-peer transactions",
+                        "Often used for local currency",
+                        "Exchange may provide escrow",
+                        "Follow the platform's payment and dispute procedures"
+                ],
+                "example": "A user can buy crypto from another user through a marketplace where the platform holds the crypto in escrow until the payment conditions are met.",
+                "important": "Follow the specific platform's P2P safety procedures and never release assets based only on screenshots or messages."
+        },
+        {
+                "id": "convert-swap",
+                "title": "Convert / Instant Swap",
+                "category": "Trading",
+                "difficulty": "Beginner",
+                "description": "Understand simple asset conversion without manually using an order book.",
+                "what": "The PDF describes convert or instant swap as a simple exchange between assets without using order books. It notes that this can be beginner-friendly.",
+                "how": "Review the quoted amount, fees or spread, network and destination asset before confirming the conversion.",
+                "keyPoints": [
+                        "Simple asset-to-asset conversion",
+                        "Does not require manually using an order book",
+                        "Beginner-friendly in the PDF's description",
+                        "Pricing may be slightly less favorable than spot trading"
+                ],
+                "example": "A user may convert one supported token into another using an instant-conversion interface.",
+                "important": "Always inspect the final quoted amount and network before confirming."
+        },
+        {
+                "id": "inverse-head-shoulders",
+                "title": "Inverse Head & Shoulders",
+                "category": "Patterns",
+                "difficulty": "Intermediate",
+                "description": "Study a reversal pattern built from three lows and a neckline.",
+                "what": "The PDF describes an inverted head and shoulders as a reversal pattern formed by three consecutive lows and two intermediate highs. The first and third lows are the shoulders and the middle low is the head.",
+                "how": "Identify the left shoulder, head, right shoulder and neckline. The PDF considers the pattern completed when price rises above the neckline after forming the right shoulder.",
+                "keyPoints": [
+                        "Three lows",
+                        "Middle low is the head",
+                        "First and third lows are the shoulders",
+                        "Intermediate highs form the neckline",
+                        "Break above the neckline is described as confirmation"
+                ],
+                "example": "If price forms the three-low structure and later rises above the neckline, the PDF describes this as completion of the bullish reversal setup.",
+                "important": "Chart patterns can fail. Treat neckline breaks as analytical confirmation criteria from the PDF, not guarantees."
+        },
+        {
+                "id": "head-shoulders-pdf",
+                "title": "Head & Shoulders",
+                "category": "Patterns",
+                "difficulty": "Intermediate",
+                "description": "Study a reversal pattern made of a left shoulder, head, right shoulder and neckline.",
+                "what": "The PDF describes Head and Shoulders as a reversal pattern consisting of three distinct sections: left shoulder, head and right shoulder, with a neckline forming the base.",
+                "how": "Identify the preceding trend, then the left shoulder, head, right shoulder and neckline. Watch for price movement through the neckline as the PDF's confirmation condition.",
+                "keyPoints": [
+                        "Should be preceded by a defined trend",
+                        "Head is higher than the surrounding shoulders",
+                        "Right shoulder peak is lower than the head",
+                        "Neckline is the key reference",
+                        "Below the neckline confirms the bearish setup in the PDF",
+                        "Above the neckline can confirm a bullish setup"
+                ],
+                "example": "A potential bearish structure may form after an extended advance; a break below the neckline is described in the PDF as confirmation of the bearish setup.",
+                "important": "The PDF notes that pattern interpretation depends on formation and confirmation; a chart pattern is not a guaranteed future outcome."
+        }
+];
+
+
+    /* ==========================================
+       LOAD LOCAL NOTES
+    ========================================== */
+
+    const STORAGE_KEY = "uswin_learning_notes";
+
+    let localLessons = [];
+
+    try {
+      localLessons =
+        JSON.parse(
+          localStorage.getItem(STORAGE_KEY)
+        ) || [];
+    } catch (error) {
+      localLessons = [];
+    }
+
+
+    /* ==========================================
+       STATE
+    ========================================== */
+
+    let activeCategory = "All";
+    let searchTerm = "";
+
+
+    /* ==========================================
+       ELEMENTS
+    ========================================== */
+
+    const learningGrid =
+      document.getElementById("learningGrid");
+
+    const learningSearch =
+      document.getElementById("learningSearch");
+
+    const learningCount =
+      document.getElementById("learningCount");
+
+    const categoryFilters =
+      document.getElementById("categoryFilters");
+
+    const lessonModal =
+      document.getElementById("lessonModal");
+
+    const lessonModalClose =
+      document.getElementById("lessonModalClose");
+
+    const modalTitle =
+      document.getElementById("modalTitle");
+
+    const modalCategory =
+      document.getElementById("modalCategory");
+
+    const modalContent =
+      document.getElementById("modalContent");
+
+    const addNoteModal =
+      document.getElementById("addNoteModal");
+
+    const addNoteButton =
+      document.getElementById("addNoteButton");
+
+    const addNoteModalClose =
+      document.getElementById("addNoteModalClose");
+
+    const cancelAddNote =
+      document.getElementById("cancelAddNote");
+
+    const addNoteForm =
+      document.getElementById("addNoteForm");
+
+    const toast =
+      document.getElementById("toast");
+
+
+    /* ==========================================
+       ALL LESSONS
+    ========================================== */
+
+    function getAllLessons() {
+      return [
+        ...defaultLessons,
+        ...localLessons
+      ];
+    }
+
+
+    /* ==========================================
+       ESCAPE HTML
+    ========================================== */
+
+    function escapeHTML(value) {
+
+      if (value === null || value === undefined) {
+        return "";
+      }
+
+      return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+
+    /* ==========================================
+       FIBONACCI MINI CHART
+    ========================================== */
+
+    function fibonacciChart() {
+
+      return `
+        <div class="chart-preview">
+
+          <div class="fib-level l23">
+            <span>23.6%</span>
+          </div>
+
+          <div class="fib-level l38">
+            <span>38.2%</span>
+          </div>
+
+          <div class="fib-level l50">
+            <span>50%</span>
+          </div>
+
+          <div class="fib-level l61">
+            <span>61.8%</span>
+          </div>
+
+          <div class="fib-level l78">
+            <span>78.6%</span>
+          </div>
+
+          <div class="price-line">
+
+            <svg
+              viewBox="0 0 500 170"
+              preserveAspectRatio="none"
+              aria-label="Fibonacci price chart"
+            >
+
+              <polyline
+                points="
+                  0,145
+                  25,130
+                  50,138
+                  72,112
+                  94,118
+                  115,95
+                  137,103
+                  158,76
+                  180,84
+                  201,62
+                  222,72
+                  245,44
+                  265,58
+                  285,35
+                  306,49
+                  330,25
+                  350,48
+                  371,38
+                  390,65
+                  412,55
+                  435,82
+                  455,67
+                  475,91
+                  500,70
+                "
+                fill="none"
+                stroke="#f5c451"
+                stroke-width="2.2"
+                vector-effect="non-scaling-stroke"
+              />
+
+            </svg>
+
+          </div>
+
+        </div>
+      `;
+    }
+
+
+    /* ==========================================
+       CARD FIGURE
+    ========================================== */
+
+    function cardFigure(lesson) {
+
+      if (lesson.figure) {
+        return fibonacciChart();
+      }
+
+      return "";
+    }
+
+
+    /* ==========================================
+       RENDER CARDS
+    ========================================== */
+
+    function renderLessons() {
+
+      const allLessons = getAllLessons();
+
+      const filtered =
+        allLessons.filter((lesson) => {
+
+          const matchesCategory =
+            activeCategory === "All" ||
+            lesson.category === activeCategory;
+
+          const searchableText =
+            `
+              ${lesson.title}
+              ${lesson.category}
+              ${lesson.description}
+              ${lesson.what}
+            `.toLowerCase();
+
+          const matchesSearch =
+            !searchTerm ||
+            searchableText.includes(
+              searchTerm.toLowerCase()
+            );
+
+          return (
+            matchesCategory &&
+            matchesSearch
+          );
+        });
+
+
+      learningCount.textContent =
+        `Showing ${filtered.length} learning note${
+          filtered.length === 1 ? "" : "s"
+        }`;
+
+
+      if (filtered.length === 0) {
+
+        learningGrid.innerHTML = `
+          <div class="empty-results">
+
+            <h3 style="color: var(--text); margin-bottom: 8px;">
+              No learning notes found
+            </h3>
+
+            <p>
+              Try another search term or category.
+            </p>
+
+          </div>
+        `;
+
+        return;
+      }
+
+
+      learningGrid.innerHTML =
+        filtered
+          .map((lesson, index) => {
+
+            const isFeatured =
+              lesson.id === "fib-retracement";
+
+            const isLocal =
+              lesson.local === true;
+
+            return `
+              <article
+                class="learning-card ${
+                  isFeatured ? "featured" : ""
+                }"
+              >
+
+                <div class="learning-card-top">
+
+                  <span class="category-tag">
+                    ${escapeHTML(lesson.category)}
+                  </span>
+
+                  <span class="difficulty">
+                    ${escapeHTML(lesson.difficulty)}
+                  </span>
+
+                </div>
+
+                <h3>
+                  ${escapeHTML(lesson.title)}
+                </h3>
+
+                <p class="learning-card-description">
+                  ${escapeHTML(lesson.description)}
+                </p>
+
+                ${cardFigure(lesson)}
+
+                <div class="card-footer">
+
+                  <div>
+
+                    ${
+                      isLocal
+                        ? `
+                          <span class="local-note-label">
+                            Added locally
+                          </span>
+                        `
+                        : ""
+                    }
+
+                  </div>
+
+                  <button
+                    class="read-button"
+                    data-lesson-id="${escapeHTML(lesson.id)}"
+                  >
+                    Read Note →
+                  </button>
+
+                </div>
+
+              </article>
+            `;
+          })
+          .join("");
+
+
+      document
+        .querySelectorAll(".read-button")
+        .forEach((button) => {
+
+          button.addEventListener(
+            "click",
+            () => {
+
+              openLesson(
+                button.dataset.lessonId
+              );
+
+            }
+          );
+
+        });
+    }
+
+
+    /* ==========================================
+       OPEN LESSON
+    ========================================== */
+
+    function openLesson(id) {
+
+      const lesson =
+        getAllLessons().find(
+          (item) => item.id === id
+        );
+
+      if (!lesson) {
+        return;
+      }
+
+
+      modalTitle.textContent =
+        lesson.title;
+
+      modalCategory.textContent =
+        lesson.category;
+
+
+      let keyPointsHTML = "";
+
+      if (
+        Array.isArray(lesson.keyPoints) &&
+        lesson.keyPoints.length
+      ) {
+
+        keyPointsHTML = `
+          <div class="lesson-section">
+
+            <h3>
+              Key Points
+            </h3>
+
+            <ul>
+
+              ${lesson.keyPoints
+                .map(
+                  (point) =>
+                    `<li>${escapeHTML(point)}</li>`
+                )
+                .join("")}
+
+            </ul>
+
+          </div>
+        `;
+      }
+
+
+      modalContent.innerHTML = `
+
+        <div class="lesson-meta">
+
+          <span class="category-tag">
+            ${escapeHTML(lesson.category)}
+          </span>
+
+          <span class="category-tag">
+            ${escapeHTML(lesson.difficulty)}
+          </span>
+
+        </div>
+
+
+        <div class="lesson-section">
+
+          <h3>
+            What is it?
+          </h3>
+
+          <p>
+            ${escapeHTML(lesson.what)}
+          </p>
+
+        </div>
+
+
+        ${
+          lesson.figure
+            ? `
+              <div class="lesson-figure">
+
+                ${fibonacciChart()}
+
+                <div class="lesson-figure-caption">
+                  Illustrative Fibonacci retracement example.
+                </div>
+
+              </div>
+            `
+            : ""
+        }
+
+
+        ${
+          lesson.how
+            ? `
+              <div class="lesson-section">
+
+                <h3>
+                  How to use it
+                </h3>
+
+                <p>
+                  ${escapeHTML(lesson.how)}
+                </p>
+
+              </div>
+            `
+            : ""
+        }
+
+
+        ${keyPointsHTML}
+
+
+        ${
+          lesson.example
+            ? `
+              <div class="lesson-section">
+
+                <h3>
+                  Example
+                </h3>
+
+                <p>
+                  ${escapeHTML(lesson.example)}
+                </p>
+
+              </div>
+            `
+            : ""
+        }
+
+
+        ${
+          lesson.important
+            ? `
+              <div class="lesson-section">
+
+                <h3>
+                  Important Note
+                </h3>
+
+                <p>
+                  ${escapeHTML(lesson.important)}
+                </p>
+
+              </div>
+            `
+            : ""
+        }
+
+      `;
+
+
+      lessonModal.classList.add("active");
+
+      document.body.classList.add("modal-open");
+    }
+
+
+    /* ==========================================
+       CLOSE LESSON
+    ========================================== */
+
+    function closeLesson() {
+
+      lessonModal.classList.remove("active");
+
+      document.body.classList.remove("modal-open");
+    }
+
+
+    lessonModalClose.addEventListener(
+      "click",
+      closeLesson
+    );
+
+
+    lessonModal.addEventListener(
+      "click",
+      (event) => {
+
+        if (
+          event.target === lessonModal
+        ) {
+          closeLesson();
+        }
+
+      }
+    );
+
+
+    /* ==========================================
+       CATEGORY FILTER
+    ========================================== */
+
+    categoryFilters.addEventListener(
+      "click",
+      (event) => {
+
+        const button =
+          event.target.closest(
+            ".filter-button"
+          );
+
+        if (!button) {
+          return;
+        }
+
+        document
+          .querySelectorAll(".filter-button")
+          .forEach(
+            (item) =>
+              item.classList.remove(
+                "active"
+              )
+          );
+
+        button.classList.add("active");
+
+        activeCategory =
+          button.dataset.category;
+
+        renderLessons();
+
+      }
+    );
+
+
+    /* ==========================================
+       SEARCH
+    ========================================== */
+
+    learningSearch.addEventListener(
+      "input",
+      (event) => {
+
+        searchTerm =
+          event.target.value.trim();
+
+        renderLessons();
+
+      }
+    );
+
+
+    /* ==========================================
+       ADD NOTE MODAL
+    ========================================== */
+
+    function openAddNote() {
+
+      addNoteModal.classList.add("active");
+
+      document.body.classList.add("modal-open");
+
+    }
+
+
+    function closeAddNote() {
+
+      addNoteModal.classList.remove("active");
+
+      document.body.classList.remove("modal-open");
+
+    }
+
+
+    addNoteButton.addEventListener(
+      "click",
+      openAddNote
+    );
+
+
+    addNoteModalClose.addEventListener(
+      "click",
+      closeAddNote
+    );
+
+
+    cancelAddNote.addEventListener(
+      "click",
+      closeAddNote
+    );
+
+
+    addNoteModal.addEventListener(
+      "click",
+      (event) => {
+
+        if (
+          event.target === addNoteModal
+        ) {
+          closeAddNote();
+        }
+
+      }
+    );
+
+
+    /* ==========================================
+       SAVE NOTE
+    ========================================== */
+
+    addNoteForm.addEventListener(
+      "submit",
+      (event) => {
+
+        event.preventDefault();
+
+
+        const title =
+          document
+            .getElementById("noteTitle")
+            .value
+            .trim();
+
+        const category =
+          document
+            .getElementById("noteCategory")
+            .value;
+
+        const difficulty =
+          document
+            .getElementById("noteDifficulty")
+            .value;
+
+        const description =
+          document
+            .getElementById("noteDescription")
+            .value
+            .trim();
+
+        const what =
+          document
+            .getElementById("noteWhat")
+            .value
+            .trim();
+
+        const how =
+          document
+            .getElementById("noteHow")
+            .value
+            .trim();
+
+        const keyText =
+          document
+            .getElementById("noteKey")
+            .value
+            .trim();
+
+        const example =
+          document
+            .getElementById("noteExample")
+            .value
+            .trim();
+
+        const important =
+          document
+            .getElementById("noteImportant")
+            .value
+            .trim();
+
+
+        if (
+          !title ||
+          !description ||
+          !what
+        ) {
+
+          showToast(
+            "Please complete the required fields."
+          );
+
+          return;
+        }
+
+
+        const keyPoints =
+          keyText
+            ? keyText
+                .split("\n")
+                .map(
+                  (item) =>
+                    item.trim()
+                )
+                .filter(Boolean)
+            : [];
+
+
+        const newLesson = {
+
+          id:
+            "local-" +
+            Date.now(),
+
+          title,
+
+          category,
+
+          difficulty,
+
+          description,
+
+          what,
+
+          how,
+
+          keyPoints,
+
+          example,
+
+          important,
+
+          local: true
+
+        };
+
+
+        localLessons.push(
+          newLesson
+        );
+
+
+        try {
+
+          localStorage.setItem(
+            STORAGE_KEY,
+            JSON.stringify(
+              localLessons
+            )
+          );
+
+        } catch (error) {
+
+          showToast(
+            "Unable to save this note in the browser."
+          );
+
+          return;
+
+        }
+
+
+        addNoteForm.reset();
+
+        closeAddNote();
+
+        renderLessons();
+
+        showToast(
+          "Learning note added successfully."
+        );
+
+
+        setTimeout(() => {
+
+          openLesson(
+            newLesson.id
+          );
+
+        }, 350);
+
+      }
+    );
+
+
+    /* ==========================================
+       TOAST
+    ========================================== */
+
+    let toastTimer;
+
+    function showToast(message) {
+
+      toast.textContent =
+        message;
+
+      toast.classList.add("show");
+
+      clearTimeout(
+        toastTimer
+      );
+
+      toastTimer =
+        setTimeout(() => {
+
+          toast.classList.remove(
+            "show"
+          );
+
+        }, 2800);
+    }
+
+
+    /* ==========================================
+       COPY CONTRACT
+    ========================================== */
+
+    const copyContract =
+      document.getElementById(
+        "copyContract"
+      );
+
+    const contractAddress =
+      document.getElementById(
+        "contractAddress"
+      );
+
+
+    copyContract.addEventListener(
+      "click",
+      async () => {
+
+        const address =
+          contractAddress.textContent.trim();
+
+        try {
+
+          await navigator.clipboard.writeText(
+            address
+          );
+
+          copyContract.textContent =
+            "Copied ✓";
+
+          showToast(
+            "Contract address copied."
+          );
+
+          setTimeout(() => {
+
+            copyContract.textContent =
+              "Copy Contract";
+
+          }, 1800);
+
+        } catch (error) {
+
+          showToast(
+            "Could not copy automatically."
+          );
+
+        }
+
+      }
+    );
+
+
+    /* ==========================================
+       MOBILE MENU
+    ========================================== */
+
+    const mobileMenuButton =
+      document.getElementById(
+        "mobileMenuButton"
+      );
+
+    const mobileMenu =
+      document.getElementById(
+        "mobileMenu"
+      );
+
+
+    mobileMenuButton.addEventListener(
+      "click",
+      () => {
+
+        mobileMenu.classList.toggle(
+          "active"
+        );
+
+      }
+    );
+
+
+    mobileMenu
+      .querySelectorAll("a")
+      .forEach((link) => {
+
+        link.addEventListener(
+          "click",
+          () => {
+
+            mobileMenu.classList.remove(
+              "active"
+            );
+
+          }
+        );
+
+      });
+
+
+    /* ==========================================
+       ESC KEY
+    ========================================== */
+
+    document.addEventListener(
+      "keydown",
+      (event) => {
+
+        if (
+          event.key === "Escape"
+        ) {
+
+          closeLesson();
+
+          closeAddNote();
+
+        }
+
+      }
+    );
+
+
+    /* ==========================================
+       INITIAL RENDER
+    ========================================== */
+
+    renderLessons();
+
+  </script>
+
+</body>
+</html>
