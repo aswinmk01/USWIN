@@ -536,6 +536,100 @@
     }
 
     /* =========================
+       ONCHAIN TRADING + COMMUNITY
+    ========================= */
+
+    .link-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .link-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      min-height: 260px;
+      padding: 30px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.055),
+        rgba(255, 255, 255, 0.018)
+      );
+      overflow: hidden;
+      transition:
+        transform 0.25s ease,
+        border-color 0.25s ease,
+        background 0.25s ease;
+    }
+
+    .link-card::before {
+      content: "";
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      right: -80px;
+      top: -80px;
+      border-radius: 50%;
+      background: radial-gradient(
+        circle,
+        rgba(245, 196, 81, 0.12),
+        transparent 70%
+      );
+      pointer-events: none;
+    }
+
+    .link-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(245, 196, 81, 0.30);
+      background: linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.075),
+        rgba(255, 255, 255, 0.025)
+      );
+    }
+
+    .link-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      margin-bottom: 20px;
+      border: 1px solid rgba(245, 196, 81, 0.25);
+      border-radius: 13px;
+      background: rgba(245, 196, 81, 0.07);
+      color: var(--gold-light);
+      font-size: 1.35rem;
+    }
+
+    .link-card h3 {
+      font-size: 1.3rem;
+      line-height: 1.25;
+    }
+
+    .link-card p {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .link-card .button {
+      margin-top: auto;
+      align-self: flex-start;
+      padding: 10px 16px;
+      font-size: 0.82rem;
+    }
+
+    @media (max-width: 950px) {
+      .link-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* =========================
        LEARNING CENTER
     ========================= */
 
@@ -929,6 +1023,130 @@
       border-radius: 16px;
 
       color: var(--muted);
+    }
+
+
+    /* =========================
+       ANNOUNCEMENTS + SCHEDULE
+    ========================= */
+
+    .updates-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.25fr;
+      gap: 18px;
+    }
+
+    .updates-panel {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 24px;
+      background: linear-gradient(145deg, rgba(255,255,255,.055), rgba(255,255,255,.018));
+    }
+
+    .updates-panel h3 {
+      font-size: 1.25rem;
+      margin-bottom: 6px;
+    }
+
+    .updates-panel > p {
+      color: var(--muted);
+      font-size: .86rem;
+      margin-bottom: 18px;
+    }
+
+    .update-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .update-item {
+      padding: 16px;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      background: rgba(255,255,255,.025);
+    }
+
+    .update-item-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .update-item h4 { font-size: 1rem; }
+    .update-item p { color: var(--muted); margin-top: 6px; font-size: .86rem; }
+    .update-meta { color: var(--gold-light); font-size: .72rem; margin-top: 8px; }
+
+    .admin-only { display: none !important; }
+    body.admin-mode .admin-only { display: inline-flex !important; }
+    body.admin-mode .admin-panel { display: block !important; }
+
+    .admin-panel {
+      display: none;
+      margin-top: 18px;
+      padding: 18px;
+      border: 1px solid rgba(245,196,81,.2);
+      border-radius: 14px;
+      background: rgba(245,196,81,.035);
+    }
+
+    .admin-badge {
+      display: none;
+      margin-left: 8px;
+      color: var(--green);
+      font-size: .7rem;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    body.admin-mode .admin-badge { display: inline; }
+
+    .delete-button {
+      border: 1px solid rgba(255,107,122,.3);
+      border-radius: 8px;
+      padding: 7px 10px;
+      background: rgba(255,107,122,.06);
+      color: #ff9aa5;
+      font-size: .72rem;
+      font-weight: 700;
+    }
+
+    .delete-button:hover { background: rgba(255,107,122,.12); }
+
+    .admin-login-button {
+      border: 1px solid rgba(93,224,160,.28);
+      border-radius: 30px;
+      padding: 9px 14px;
+      background: rgba(93,224,160,.05);
+      color: var(--green);
+      font-size: .78rem;
+      font-weight: 700;
+    }
+
+    .admin-login-button:hover { background: rgba(93,224,160,.1); }
+
+    .schedule-status {
+      display: inline-flex;
+      padding: 4px 8px;
+      border-radius: 20px;
+      border: 1px solid rgba(245,196,81,.22);
+      color: var(--gold-light);
+      font-size: .65rem;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .empty-update {
+      padding: 25px 10px;
+      text-align: center;
+      color: var(--muted);
+      border: 1px dashed var(--border);
+      border-radius: 12px;
+      font-size: .85rem;
+    }
+
+    @media (max-width: 800px) {
+      .updates-grid { grid-template-columns: 1fr; }
     }
 
     /* =========================
@@ -1498,10 +1716,18 @@
       <ul class="nav-links">
         <li><a href="#about">About</a></li>
         <li><a href="#token">Token</a></li>
-        <li><a href="#learning">Learning</a></li>
+        <li><a href="#learning">Learning</a>
+        <a href="#updates">Updates</a></li>
+        <li><a href="#updates">Updates</a></li>
+        <li><a href="#trading">Onchain Trading</a></li>
+        <li><a href="#community">Discord</a></li>
         <li><a href="#philosophy">Philosophy</a></li>
         <li><a href="#mission">Mission</a></li>
 
+        <li>
+          <button class="admin-login-button" id="adminButton" type="button">Admin</button>
+          <span class="admin-badge">● Admin mode</span>
+        </li>
         <li>
           <a
             href="https://pancakeswap.finance/swap?chain=bsc&outputCurrency=0x9ccf31F2031F1f3dBb7CE312f7415AE2d9678b95&inputCurrency=0x7130d2A12B9BCbFAe4f2634d864A1Ee1Ce3Ead9c"
@@ -1529,8 +1755,11 @@
         <a href="#about">About</a>
         <a href="#token">Token</a>
         <a href="#learning">Learning</a>
+        <a href="#trading">Onchain Trading</a>
+        <a href="#community">Discord</a>
         <a href="#philosophy">Philosophy</a>
         <a href="#mission">Mission</a>
+        <button class="admin-login-button" id="adminButtonMobile" type="button">Admin</button>
 
         <a
           href="https://pancakeswap.finance/swap?chain=bsc&outputCurrency=0x9ccf31F2031F1f3dBb7CE312f7415AE2d9678b95&inputCurrency=0x7130d2A12B9BCbFAe4f2634d864A1Ee1Ce3Ead9c"
@@ -1583,6 +1812,22 @@
           rel="noopener noreferrer"
         >
           SWAP USWIN
+        </a>
+
+        <a
+          href="#trading"
+          class="button button-secondary"
+        >
+          Onchain Trading
+        </a>
+
+        <a
+          href="https://discord.gg/peVqReTYB"
+          class="button button-secondary"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Join Discord
         </a>
 
       </div>
@@ -1739,6 +1984,106 @@
        LEARNING CENTER
   ========================== -->
 
+  <!-- =========================
+       ONCHAIN TRADING + COMMUNITY
+    ========================== -->
+
+  <section id="trading">
+
+    <div class="container">
+
+      <div class="section-heading">
+
+        <div class="eyebrow">
+          Onchain Trading
+        </div>
+
+        <h2>Trade USWIN Onchain</h2>
+
+        <p>
+          Access USWIN through supported onchain trading platforms
+          and stay connected with the USWIN community.
+        </p>
+
+      </div>
+
+      <div class="link-grid">
+
+        <div class="link-card">
+
+          <div class="link-icon" aria-hidden="true">⚡</div>
+
+          <h3>Bitget Onchain</h3>
+
+          <p>
+            Trade USWIN on BNB Chain through Bitget Onchain.
+          </p>
+
+          <a
+            href="https://www.bitget.site/on-chain/bnb/0x9ccf31f2031f1f3dbb7ce312f7415ae2d9678b95"
+            class="button button-primary"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Trade on Bitget
+          </a>
+
+        </div>
+
+        <div class="link-card">
+
+          <div class="link-icon" aria-hidden="true">◈</div>
+
+          <h3>Binance Wallet</h3>
+
+          <p>
+            Explore onchain USWIN trading with Binance Wallet on BNB Chain.
+          </p>
+
+          <a
+            href="https://web3.binance.com/en-IN/token/bsc/0x9ccf31f2031f1f3dbb7ce312f7415ae2d9678b95"
+            class="button button-secondary"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Trade with Binance
+          </a>
+
+        </div>
+
+        <div class="link-card" id="community">
+
+          <div class="link-icon" aria-hidden="true">💬</div>
+
+          <h3>Discord Server</h3>
+
+          <p>
+            Join the USWIN community, share ideas, learn together
+            and stay connected with the latest discussions.
+          </p>
+
+          <a
+            href="https://discord.gg/peVqReTYB"
+            class="button button-secondary"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Join Discord
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       LEARNING CENTER
+    ========================== -->
+
   <section id="learning" class="learning-section">
 
     <div class="container">
@@ -1870,7 +2215,7 @@
         </div>
 
         <button
-          class="add-note-button"
+          class="add-note-button admin-only"
           id="addNoteButton"
         >
           + Add Learning Note
@@ -1890,6 +2235,63 @@
 
   </section>
 
+
+
+  <!-- =========================
+       ANNOUNCEMENTS + SCHEDULE
+  ========================== -->
+
+  <section id="updates">
+    <div class="container">
+      <div class="section-heading">
+        <div class="eyebrow">USWIN Updates</div>
+        <h2>Announcements &amp; Schedule</h2>
+        <p>Stay informed about upcoming USWIN events, scheduled sessions and important community announcements.</p>
+      </div>
+
+      <div class="updates-grid">
+        <div class="updates-panel">
+          <h3>📢 Announcements</h3>
+          <p>Important notifications from the USWIN team.</p>
+          <div class="update-list" id="announcementList"></div>
+        </div>
+
+        <div class="updates-panel">
+          <h3>🗓️ Schedule</h3>
+          <p>Upcoming and recently scheduled community events.</p>
+          <div class="update-list" id="scheduleList"></div>
+        </div>
+      </div>
+
+      <div class="admin-panel" id="adminPanel">
+        <div class="section-heading" style="margin-bottom:25px;text-align:left;">
+          <div class="eyebrow">Admin Controls</div>
+          <h2 style="font-size:1.8rem;">Manage USWIN Content</h2>
+          <p style="margin-left:0;">Only admin mode can add learning notes, announcements and schedules, or delete them.</p>
+        </div>
+
+        <div class="form-grid">
+          <form id="announcementForm">
+            <div class="form-group"><label for="announcementTitle">Announcement Title</label><input id="announcementTitle" required placeholder="e.g. Community meeting reminder"></div>
+            <div class="form-group"><label for="announcementDate">Date / Time</label><input id="announcementDate" type="datetime-local" required></div>
+            <div class="form-group"><label for="announcementMessage">Message</label><textarea id="announcementMessage" required placeholder="Write the notification..."></textarea></div>
+            <button class="button button-primary" type="submit">Publish Announcement</button>
+          </form>
+
+          <form id="scheduleForm">
+            <div class="form-group"><label for="scheduleTitle">Event Title</label><input id="scheduleTitle" required placeholder="e.g. USWIN Learning Session"></div>
+            <div class="form-grid">
+              <div class="form-group"><label for="scheduleDate">Date</label><input id="scheduleDate" type="date" required></div>
+              <div class="form-group"><label for="scheduleTime">Time</label><input id="scheduleTime" type="time" required></div>
+            </div>
+            <div class="form-group"><label for="scheduleStatus">Status</label><select id="scheduleStatus"><option>Scheduled</option><option>Live</option><option>Completed</option><option>Cancelled</option></select></div>
+            <div class="form-group"><label for="scheduleDetails">Details</label><textarea id="scheduleDetails" required placeholder="Describe the event..."></textarea></div>
+            <button class="button button-primary" type="submit">Add to Schedule</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- =========================
        PHILOSOPHY
@@ -2190,6 +2592,23 @@
             rel="noopener noreferrer"
           >
             SWAP USWIN
+          </a>
+
+
+          <a
+            href="#trading"
+            class="button button-secondary"
+          >
+            Onchain Trading
+          </a>
+
+          <a
+            href="https://discord.gg/peVqReTYB"
+            class="button button-secondary"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Join Discord
           </a>
 
         </div>
@@ -2514,9 +2933,9 @@
           </div>
 
           <p class="form-note">
-            Notes created here are stored locally in this browser.
-            This is a prototype editor for the USWIN Learning Center.
-            A future backend can make published notes available to everyone.
+            Only authenticated admin mode can publish notes from this page.
+            Notes, announcements and schedules are currently stored locally in this browser.
+            For secure owner-only publishing across all visitors and devices, connect this site to a backend/authentication service.
           </p>
 
         </form>
@@ -2985,6 +3404,18 @@
     ========================================== */
 
     const STORAGE_KEY = "uswin_learning_notes";
+    const ANNOUNCEMENT_KEY = "uswin_announcements";
+    const SCHEDULE_KEY = "uswin_schedule";
+
+    // IMPORTANT: GitHub Pages is a static site. This client-side password is a convenience gate,
+    // not true security. For real owner-only publishing across devices, connect a backend/auth service.
+    const ADMIN_PASSWORD = "CHANGE-THIS-PASSWORD";
+
+    let announcements = [];
+    let schedules = [];
+    try { announcements = JSON.parse(localStorage.getItem(ANNOUNCEMENT_KEY)) || []; } catch (e) { announcements = []; }
+    try { schedules = JSON.parse(localStorage.getItem(SCHEDULE_KEY)) || []; } catch (e) { schedules = []; }
+
 
     let localLessons = [];
 
@@ -3055,6 +3486,126 @@
     const toast =
       document.getElementById("toast");
 
+    const announcementList = document.getElementById("announcementList");
+    const scheduleList = document.getElementById("scheduleList");
+    const announcementForm = document.getElementById("announcementForm");
+    const scheduleForm = document.getElementById("scheduleForm");
+    const adminButton = document.getElementById("adminButton");
+    const adminButtonMobile = document.getElementById("adminButtonMobile");
+
+
+    /* ==========================================
+       ADMIN AUTHENTICATION
+    ========================================== */
+
+    function isAdmin() {
+      return sessionStorage.getItem("uswin_admin") === "true";
+    }
+
+    function setAdminMode(enabled) {
+      if (enabled) sessionStorage.setItem("uswin_admin", "true");
+      else sessionStorage.removeItem("uswin_admin");
+      document.body.classList.toggle("admin-mode", enabled);
+      if (adminButton) adminButton.textContent = enabled ? "Logout" : "Admin";
+      if (adminButtonMobile) adminButtonMobile.textContent = enabled ? "Logout" : "Admin";
+      renderLessons();
+      renderUpdates();
+    }
+
+    function toggleAdmin() {
+      if (isAdmin()) { setAdminMode(false); showToast("Admin mode closed."); return; }
+      const password = prompt("Enter the USWIN admin password:");
+      if (password === ADMIN_PASSWORD) { setAdminMode(true); showToast("Admin mode enabled."); }
+      else if (password !== null) showToast("Incorrect admin password.");
+    }
+
+    /* ==========================================
+       ANNOUNCEMENTS + SCHEDULE
+    ========================================== */
+
+    function saveUpdates() {
+      localStorage.setItem(ANNOUNCEMENT_KEY, JSON.stringify(announcements));
+      localStorage.setItem(SCHEDULE_KEY, JSON.stringify(schedules));
+    }
+
+    function formatDateTime(value) {
+      if (!value) return "";
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) return value;
+      return date.toLocaleString([], { dateStyle: "medium", timeStyle: "short" });
+    }
+
+    function renderUpdates() {
+      if (!announcementList || !scheduleList) return;
+      announcementList.innerHTML = announcements.length ? announcements.map(item => `
+        <article class="update-item">
+          <div class="update-item-top">
+            <div><h4>${escapeHTML(item.title)}</h4><div class="update-meta">${escapeHTML(formatDateTime(item.date))}</div></div>
+            ${isAdmin() ? `<button class="delete-button" data-delete-announcement="${escapeHTML(item.id)}">Delete</button>` : ""}
+          </div>
+          <p>${escapeHTML(item.message)}</p>
+        </article>
+      `).join("") : `<div class="empty-update">No announcements yet.</div>`;
+
+      scheduleList.innerHTML = schedules.length ? schedules.slice().sort((a,b) => `${a.date}T${a.time}`.localeCompare(`${b.date}T${b.time}`)).map(item => `
+        <article class="update-item">
+          <div class="update-item-top">
+            <div>
+              <h4>${escapeHTML(item.title)}</h4>
+              <div class="update-meta">${escapeHTML(item.date)} · ${escapeHTML(item.time)}</div>
+            </div>
+            <div style="display:flex;gap:8px;align-items:center;">
+              <span class="schedule-status">${escapeHTML(item.status)}</span>
+              ${isAdmin() ? `<button class="delete-button" data-delete-schedule="${escapeHTML(item.id)}">Delete</button>` : ""}
+            </div>
+          </div>
+          <p>${escapeHTML(item.details)}</p>
+        </article>
+      `).join("") : `<div class="empty-update">No scheduled events yet.</div>`;
+
+      document.querySelectorAll("[data-delete-announcement]").forEach(button => button.addEventListener("click", () => {
+        if (!isAdmin()) return;
+        if (!confirm("Delete this announcement?")) return;
+        announcements = announcements.filter(item => item.id !== button.dataset.deleteAnnouncement);
+        saveUpdates(); renderUpdates(); showToast("Announcement deleted.");
+      }));
+
+      document.querySelectorAll("[data-delete-schedule]").forEach(button => button.addEventListener("click", () => {
+        if (!isAdmin()) return;
+        if (!confirm("Delete this scheduled event?")) return;
+        schedules = schedules.filter(item => item.id !== button.dataset.deleteSchedule);
+        saveUpdates(); renderUpdates(); showToast("Scheduled event deleted.");
+      }));
+    }
+
+    if (adminButton) adminButton.addEventListener("click", toggleAdmin);
+    if (adminButtonMobile) adminButtonMobile.addEventListener("click", () => { toggleAdmin(); mobileMenu.classList.remove("active"); });
+
+    if (announcementForm) announcementForm.addEventListener("submit", event => {
+      event.preventDefault();
+      if (!isAdmin()) return showToast("Admin access required.");
+      announcements.unshift({
+        id: "announcement-" + Date.now(),
+        title: document.getElementById("announcementTitle").value.trim(),
+        date: document.getElementById("announcementDate").value,
+        message: document.getElementById("announcementMessage").value.trim()
+      });
+      saveUpdates(); announcementForm.reset(); renderUpdates(); showToast("Announcement published.");
+    });
+
+    if (scheduleForm) scheduleForm.addEventListener("submit", event => {
+      event.preventDefault();
+      if (!isAdmin()) return showToast("Admin access required.");
+      schedules.push({
+        id: "schedule-" + Date.now(),
+        title: document.getElementById("scheduleTitle").value.trim(),
+        date: document.getElementById("scheduleDate").value,
+        time: document.getElementById("scheduleTime").value,
+        status: document.getElementById("scheduleStatus").value,
+        details: document.getElementById("scheduleDetails").value.trim()
+      });
+      saveUpdates(); scheduleForm.reset(); renderUpdates(); showToast("Event added to schedule.");
+    });
 
     /* ==========================================
        ALL LESSONS
@@ -3589,6 +4140,11 @@
 
     function openAddNote() {
 
+      if (!isAdmin()) {
+        showToast("Admin access required to add a learning note.");
+        return;
+      }
+
       addNoteModal.classList.add("active");
 
       document.body.classList.add("modal-open");
@@ -3647,6 +4203,10 @@
 
         event.preventDefault();
 
+        if (!isAdmin()) {
+          showToast("Admin access required to publish a learning note.");
+          return;
+        }
 
         const title =
           document
@@ -3957,7 +4517,9 @@
        INITIAL RENDER
     ========================================== */
 
+    setAdminMode(isAdmin());
     renderLessons();
+    renderUpdates();
 
   </script>
 
